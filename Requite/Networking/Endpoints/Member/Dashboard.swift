@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct Dashboard: Endpoint {
-    let baseUrl: URL
-    var path: String
-    var method: HttpMethod
-    var headers: [String : String]?
-    var body: [String : any Encodable]?
+//struct Dashboard: Endpoint {
+//    let baseUrl: URL
+//    var path: String
+//    var method: HttpMethod
+//    var headers: [String : String]?
+//    var body: [String : any Encodable]?
     
-    static func search(query: String) -> BusinessInfo {
-        
-    }
-}
+//    static func search(query: String) -> BusinessInfo {
+//        
+//    }
+//}
 
 

@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct ProgramView: View {
+    @State private var model: ProgramViewModel
+    
+    init(businessId: String, member: Bool){
+        _model = State(initialValue: ProgramViewModel(id: businessId, ismember: member))
+    }
+    
     var body: some View {
         ZStack{
             Color(#colorLiteral(red: 0.9609374404, green: 0.9609374404, blue: 0.9609374404, alpha: 1))
@@ -46,5 +52,5 @@ struct ProgramView: View {
 }
 
 #Preview {
-    ProgramView()
+    //ProgramView()
 }

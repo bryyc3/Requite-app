@@ -8,7 +8,30 @@
 import Foundation
 
 
-struct BusinessInfo: Codable {
+struct ProgramSearchResults: Codable{
+    let programs: [BusinessInfo]
+}
+
+struct BusinessInfo: Codable, Hashable {
+    let id: String
     let name: String
-    let location: String?
+    let location: String
+    let member: Bool?
+    let tiers: [Tier]?
+    let rewards: [Reward]?
+}
+
+struct Tier: Codable, Hashable {
+    let id: String
+    let name: String
+    let points: Int?
+    let exclusiveRewards: [Reward]?
+}
+
+struct Reward: Codable, Hashable {
+    let id: String
+    let name: String
+    let description: String
+    let cost: Int
+    let tier: Tier?
 }
