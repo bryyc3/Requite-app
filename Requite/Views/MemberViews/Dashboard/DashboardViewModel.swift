@@ -23,11 +23,12 @@ class DashboardViewModel {
             searchResults = nil
             return
         }
-        
-        
         do{
             try await Task.sleep(for: .milliseconds(400))
-            searchResults = try await executeRequest(query: searchQuery)
+            try Task.checkCancellation()
+            
+            let request = Dashboard.search(search: searchQuery)
+            searchResults = try await NetworkManager.execute(endpoint: request, auth: false, type: ProgramSearchResults.self)
         } catch is CancellationError{
             
         } catch {

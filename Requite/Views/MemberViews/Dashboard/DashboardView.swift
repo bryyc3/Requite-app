@@ -50,7 +50,7 @@ struct DashboardView: View {
                             if let searchResults = model.searchResults?.programs {
                                 ForEach(searchResults, id: \.self){ result in
                                     NavigationLink{
-                                        ProgramView(businessId: result.id, member: result.member!)
+                                        ProgramView(businessId: result.id, member: result.member ?? false)
                                     } label: {
                                         SearchResult(business: result)
                                     }

@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum BuildRequestError: Error {
+    case encodingError
+}
+
 enum NetworkErrror: Error {
     case invalidURL
     case decodingError

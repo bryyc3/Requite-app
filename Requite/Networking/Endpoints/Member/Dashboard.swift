@@ -7,16 +7,32 @@
 
 import Foundation
 
-//struct Dashboard: Endpoint {
-//    let baseUrl: URL
-//    var path: String
-//    var method: HttpMethod
-//    var headers: [String : String]?
-//    var body: [String : any Encodable]?
+struct Dashboard: Endpoint {
+    var path: String
+    var method: HttpMethod
+    var headers: [String : String]?
+    var query: String?
+    var body: [String : any Encodable]?
     
-//    static func search(query: String) -> BusinessInfo {
-//        
-//    }
-//}
+    static func search(search: String) -> Dashboard {
+        return Dashboard(
+            path: "member/program-search",
+            method: .get,
+            headers: ["Content-Type":"application/json"],
+            query: search
+        )
+    }
+    
+    static func getProgram(businessId: String) -> Dashboard{
+        return Dashboard(
+            path: "member/program-info",
+            method: .get,
+            headers: ["Content-Type":"application/json"],
+            query: businessId
+        )
+    }
+}
+
+
 
 

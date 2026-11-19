@@ -7,22 +7,31 @@
 
 import Foundation
 
-
-func executeRequest(query: String) async throws -> ProgramSearchResults {
-    var components = URLComponents(string: "http://localhost:8000/member/program-search")!
-    
-    components.queryItems = [URLQueryItem(name: "query", value: query)]
-    
-    guard let url = components.url else {
-        throw URLError(.badURL)
+struct NetworkManager {
+    static func execute<T: Codable>(endpoint: Endpoint, auth: Bool, type: T.Type) async throws -> T?{
+        var request = try endpoint.urlRequest()
+        
+        
+        if(auth) {
+            //auth code
+        }
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        print(response)
+        guard let response = response as? HTTPURLResponse else {
+            throw NetworkErrror.noResponse
+        }
+        
+        switch response.statusCode {
+            case 200:
+                do {
+                    let decoder = JSONDecoder()
+                    return try decoder.decode(T.self, from: data)
+                } catch {
+                    throw NetworkErrror.decodingError
+                }
+            default:
+                throw NetworkErrror.invalidResponse
+        }
     }
-    
-    let (data, response) = try await URLSession.shared.data(from: url)
-    
-    let info = JSONDecoder()
-    let decoded = try info.decode(ProgramSearchResults.self, from: data)
-    
-    return decoded
 }
-//struct NetworkManager {
-//}

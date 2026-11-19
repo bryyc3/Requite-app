@@ -23,10 +23,10 @@ struct ProgramView: View {
                     Image(systemName: "person.circle.fill")
                         .font(.system(size: 65))
                     VStack(alignment: .leading){
-                        Text("Chick Fil A")
+                        Text(model.business?.name ?? "No business")
                             .font(.system(size: 32))
                             .bold()
-                        Text("Nationwide")
+                        Text(model.business?.location ?? "No location")
                             .font(.system(size: 20))
                     }
                     .padding(.leading, 5)
@@ -48,6 +48,7 @@ struct ProgramView: View {
                         endPoint: .bottomTrailing))
             }
         }
+        .task {await model.getBusinessInfo()}
     }
 }
 
